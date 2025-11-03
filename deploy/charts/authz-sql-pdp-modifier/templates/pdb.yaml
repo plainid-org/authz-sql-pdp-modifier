@@ -1,10 +1,10 @@
 {{- if .Values.podDisruptionBudget.enabled }}
-apiVersion: {{ include "authz-bigquery.podDisruptionBudget.apiVersion" . }}
+apiVersion: {{ include "authz-sql-pdp-modifier.podDisruptionBudget.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:
-  name: {{ template "authz-bigquery.fullname" . }}
+  name: {{ template "authz-sql-pdp-modifier.fullname" . }}
   labels:
-{{- include "authz-bigquery.labels" . | nindent 4 }}
+{{- include "authz-sql-pdp-modifier.labels" . | nindent 4 }}
   {{- with .Values.podDisruptionBudget.labels }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -22,6 +22,6 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "authz-bigquery.selectorLabels" . | nindent 6 }}
+      {{- include "authz-sql-pdp-modifier.selectorLabels" . | nindent 6 }}
 {{- end }}
 

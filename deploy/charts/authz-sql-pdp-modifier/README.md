@@ -15,10 +15,10 @@ The BigQuery Authorizer is a service that provides authorization capabilities fo
 
 ## Installing the Chart
 
-To install the chart with the release name `authz-bigquery`:
+To install the chart with the release name `authz-sql-pdp-modifier`:
 
 ```console
-helm install authz-bigquery ./deploy/charts/authz-bigquery
+helm install authz-sql-pdp-modifier ./deploy/charts/authz-sql-pdp-modifier
 ```
 
 This command deploys the BigQuery Authorizer on the Kubernetes cluster in the default configuration.
@@ -27,10 +27,10 @@ This command deploys the BigQuery Authorizer on the Kubernetes cluster in the de
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `authz-bigquery` deployment:
+To uninstall/delete the `authz-sql-pdp-modifier` deployment:
 
 ```console
-helm delete authz-bigquery
+helm delete authz-sql-pdp-modifier
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -42,7 +42,7 @@ The following table lists the configurable parameters of the BigQuery Authorizer
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `replicaCount` | Number of replicas | `1` |
-| `image.repository` | Image repository | `plainid/authz-bigquery` |
+| `image.repository` | Image repository | `plainid/authz-sql-pdp-modifier` |
 | `image.pullPolicy` | Image pull policy | `IfNotPresent` |
 | `image.tag` | Image tag | `""` |
 | `imagePullSecrets` | Image pull secrets | `[]` |
@@ -138,7 +138,7 @@ The following table lists the configurable parameters of the BigQuery Authorizer
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
 ```console
-helm install authz-bigquery ./deploy/charts/authz-bigquery \
+helm install authz-sql-pdp-modifier ./deploy/charts/authz-sql-pdp-modifier \
   --set replicaCount=2 \
   --set image.tag=v1.0.0
 ```
@@ -146,7 +146,7 @@ helm install authz-bigquery ./deploy/charts/authz-bigquery \
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```console
-helm install authz-bigquery -f my-values.yaml ./deploy/charts/authz-bigquery
+helm install authz-sql-pdp-modifier -f my-values.yaml ./deploy/charts/authz-sql-pdp-modifier
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)

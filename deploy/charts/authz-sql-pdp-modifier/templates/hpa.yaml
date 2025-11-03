@@ -7,14 +7,14 @@ metadata:
   {{- toYaml . | trimSuffix "\n" | nindent 4 }}
   {{- end }}
   labels:
-{{- include "authz-bigquery.labels" . | nindent 4 }}
-  name: {{ include "authz-bigquery.fullname" . }}
+{{- include "authz-sql-pdp-modifier.labels" . | nindent 4 }}
+  name: {{ include "authz-sql-pdp-modifier.fullname" . }}
   namespace: {{ .Release.Namespace }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "authz-bigquery.fullname" . }}
+    name: {{ include "authz-sql-pdp-modifier.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
