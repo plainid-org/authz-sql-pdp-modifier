@@ -1,11 +1,11 @@
-# Default values for authz-bigquery.
+# Default values for authz-sql-pdp-modifier.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: plainid/authz-bigquery
+  repository: plainid/authz-sql-pdp-modifier
   pullPolicy: IfNotPresent
   tag: ""
 
@@ -80,9 +80,9 @@ metrics:
     # Set timeout for scrape
     # timeout: 10s
   annotations: {}
-#    prometheus.io/port: '9090'
-#    prometheus.io/scrape: 'true'
-#    prometheus.io/path: '/actuator/prometheus'
+  #    prometheus.io/port: '9090'
+  #    prometheus.io/scrape: 'true'
+  #    prometheus.io/path: '/actuator/prometheus'
   ## Custom PrometheusRule to be defined
   ## The value is evaluated as a template, so, for example, the value can depend on .Release or .Chart
   ## ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
@@ -90,17 +90,17 @@ metrics:
     # prometheusRule.enabled -- If true, creates a Prometheus Operator PrometheusRule.
     enabled: false
     # prometheusRule.additionalLabels -- Additional labels to be set in metadata.
-    additionalLabels: { }
+    additionalLabels: {}
     # prometheusRule.namespace -- Namespace which Prometheus is running in.
     namespace:
     # prometheusRule.interval -- How often rules in the group are evaluated (falls back to `global.evaluation_interval` if not set).
     interval: 30s
     # prometheusRule.rules -- Rules spec template (see https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#rule).
-    rules: [ ]
+    rules: []
       # Example:
       # - alert: PodDown
       #   expr: |
-      #     pod_up{job="{{ include "authz-bigquery.fullname" . }}"} == 0
+      #     pod_up{job="{{ include "authz-sql-pdp-modifier.fullname" . }}"} == 0
       #   for: 5m
       #   labels:
       #     severity: critical
@@ -316,6 +316,3 @@ extraContainers: []
 ## @param extraDeploy Array of extra objects to deploy with the release (evaluated as a template)
 ##
 extraDeploy: []
-
-
-

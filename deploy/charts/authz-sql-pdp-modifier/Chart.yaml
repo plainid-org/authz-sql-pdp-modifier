@@ -1,11 +1,11 @@
 apiVersion: v2
-name: authz-bigquery
+name: authz-sql-pdp-modifier
 description: A Helm chart for Kubernetes
 icon: https://1.bp.blogspot.com/-SS2TiFZPpIQ/UUdSeFkTAPI/AAAAAAAAAlE/Q9oqGZCLm7U/s1600/Java7.png
 type: application
 version: 0.0.0
 appVersion: latest
-home: https://gitlab.com/zigi-project/authz-bigquery-java
+home: https://gitlab.com/zigi-project/authz-sql-pdp-modifier-java
 maintainers:
   - name: devops
     email: devops@plainid.com

@@ -2,14 +2,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: {{ template "authz-bigquery.fullname" . }}
+  name: {{ template "authz-sql-pdp-modifier.fullname" . }}
   {{- if .Values.metrics.prometheusRule.namespace }}
   namespace: {{ .Values.metrics.prometheusRule.namespace }}
   {{- end }}
   labels: {{- toYaml .Values.metrics.prometheusRule.additionalLabels | nindent 4 }}
 spec:
   groups:
-    - name: {{ template "authz-bigquery.fullname" . }}
+    - name: {{ template "authz-sql-pdp-modifier.fullname" . }}
       {{- if .Values.metrics.prometheusRule.interval }}
       interval: {{ .Values.metrics.prometheusRule.interval }}
       {{- end }}

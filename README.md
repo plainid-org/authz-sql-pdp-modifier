@@ -1,1 +1,1 @@
-# PlainID BigQuery Authorizer Helm Chart
+# PlainID SQL PDP Authorizer Helm Chart

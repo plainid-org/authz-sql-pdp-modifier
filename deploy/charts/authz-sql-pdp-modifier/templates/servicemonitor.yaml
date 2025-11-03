@@ -6,7 +6,7 @@ metadata:
   labels:
 {{ toYaml .Values.metrics.serviceMonitor.labels | indent 4}}
 {{- end }}
-  name: {{ template "authz-bigquery.fullname" . }}
+  name: {{ template "authz-sql-pdp-modifier.fullname" . }}
   namespace: {{ .Release.Namespace }}
 {{- if .Values.metrics.serviceMonitor.namespace }}
   namespace: {{ .Values.metrics.serviceMonitor.namespace }}
@@ -28,11 +28,11 @@ spec:
       sourceLabels:
         - container
       targetLabel: application
-  jobLabel: {{ template "authz-bigquery.fullname" . }}
+  jobLabel: {{ template "authz-sql-pdp-modifier.fullname" . }}
   namespaceSelector:
     matchNames:
     - {{ .Release.Namespace }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ template "authz-bigquery.name" . }}
+      app.kubernetes.io/name: {{ template "authz-sql-pdp-modifier.name" . }}
 {{- end }}

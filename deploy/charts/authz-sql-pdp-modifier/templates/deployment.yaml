@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "authz-bigquery.fullname" . }}
+  name: {{ include "authz-sql-pdp-modifier.fullname" . }}
   labels:
-{{- include "authz-bigquery.labels" . | nindent 4 }}
+{{- include "authz-sql-pdp-modifier.labels" . | nindent 4 }}
 {{- if .Values.annotations }}
   annotations:
 {{ toYaml .Values.annotations | indent 4 }}
@@ -18,11 +18,11 @@ spec:
       maxUnavailable: {{ .Values.strategy.rollingUpdate.maxUnavailable }}
   selector:
     matchLabels:
-      {{- include "authz-bigquery.selectorLabels" . | nindent 6 }}
+      {{- include "authz-sql-pdp-modifier.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "authz-bigquery.selectorLabels" . | nindent 8 }}
+        {{- include "authz-sql-pdp-modifier.selectorLabels" . | nindent 8 }}
         version: "{{ .Values.image.tag | default .Chart.AppVersion }}"
         {{- if .Values.podLabels }}
           {{- toYaml .Values.podLabels | nindent 8 }}
@@ -40,7 +40,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "authz-bigquery.serviceAccountName" . }}
+      serviceAccountName: {{ include "authz-sql-pdp-modifier.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -73,28 +73,28 @@ spec:
           {{- end}}
           envFrom:
             - configMapRef:
-                name: {{ template "authz-bigquery.fullname" . }}-env
+                name: {{ template "authz-sql-pdp-modifier.fullname" . }}-env
             - secretRef:
-                name: {{ template "authz-bigquery.fullname" . }}-secret-env
+                name: {{ template "authz-sql-pdp-modifier.fullname" . }}-secret-env
           env:
             - name: APPLICATION_NAME
-              value: "{{ template "authz-bigquery.fullname" . }}"
+              value: "{{ template "authz-sql-pdp-modifier.fullname" . }}"
             - name: NAMESPACE_NAME
               value: "{{ .Release.Namespace }}"
           volumeMounts:
-            - name: {{ include "authz-bigquery.fullname" . }}-config
+            - name: {{ include "authz-sql-pdp-modifier.fullname" . }}-config
               readOnly: false
               mountPath: /app/application.properties
               subPath: application.properties
-            - name: {{ include "authz-bigquery.fullname" . }}-config
+            - name: {{ include "authz-sql-pdp-modifier.fullname" . }}-config
               readOnly: false
               mountPath: /app/plainid.cloud.crt
               subPath: plainid.cloud.crt
-            - name: {{ include "authz-bigquery.fullname" . }}-secret
+            - name: {{ include "authz-sql-pdp-modifier.fullname" . }}-secret
               readOnly: false
               mountPath: /app/plainid.pem
               subPath: plainid.crt
-            - name: {{ include "authz-bigquery.fullname" . }}-secret
+            - name: {{ include "authz-sql-pdp-modifier.fullname" . }}-secret
               readOnly: false
               mountPath: /app/plainid_priv.key
               subPath: plainid_priv.key
@@ -157,13 +157,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        - name: {{ include "authz-bigquery.fullname" . }}-config
+        - name: {{ include "authz-sql-pdp-modifier.fullname" . }}-config
           configMap:
-            name: {{ include "authz-bigquery.fullname" . }}
+            name: {{ include "authz-sql-pdp-modifier.fullname" . }}
             defaultMode: 420
-        - name: {{ include "authz-bigquery.fullname" . }}-secret
+        - name: {{ include "authz-sql-pdp-modifier.fullname" . }}-secret
           secret:
-            secretName: {{ include "authz-bigquery.fullname" . }}
+            secretName: {{ include "authz-sql-pdp-modifier.fullname" . }}
             defaultMode: 420
         {{- if .Values.extraVolumes }}
         {{- toYaml .Values.extraVolumes | nindent 8 }}
@@ -174,7 +174,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchLabels:
-                  app.kubernetes.io/name: {{ template "authz-bigquery.name" . }}
+                  app.kubernetes.io/name: {{ template "authz-sql-pdp-modifier.name" . }}
                   namespace: {{ .Release.Namespace }}
               topologyKey: {{ .Values.antiAffinityTopologyKey }}
         {{- else if eq .Values.antiAffinity "soft" }}
@@ -185,7 +185,7 @@ spec:
                 topologyKey: {{ .Values.antiAffinityTopologyKey }}
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name: {{ template "authz-bigquery.name" . }}
+                    app.kubernetes.io/name: {{ template "authz-sql-pdp-modifier.name" . }}
                     namespace: {{ .Release.Namespace }}
       {{- end }}
     {{- with .Values.tolerations }}

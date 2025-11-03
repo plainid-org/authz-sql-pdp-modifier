@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "authz-bigquery.fullname" . }}
+  name: {{ include "authz-sql-pdp-modifier.fullname" . }}
   labels:
-    {{- include "authz-bigquery.labels" . | nindent 4 }}
+    {{- include "authz-sql-pdp-modifier.labels" . | nindent 4 }}
   {{- if or .Values.metrics.enabled .Values.service.annotations }}
   annotations:
   {{- if .Values.metrics.enabled }}
@@ -58,5 +58,5 @@ spec:
       {{- end }}
     {{- end }}
   selector:
-    {{- include "authz-bigquery.selectorLabels" . | nindent 4 }}
+    {{- include "authz-sql-pdp-modifier.selectorLabels" . | nindent 4 }}
 {{- end }}
